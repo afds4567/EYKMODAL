@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Eyk-modal Library
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This package is a module that helps you easily create modals using React.
 
-## Available Scripts
+## How to install
 
-In the project directory, you can run:
+`npm i eykmodal`
 
-### `npm start`
+## How to use
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+import { Modal } from "eykmodal";
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+export default function DetailModal() {
+  return (
+    <Modal>
+      //contents what you want to put in modal
+      <div>"HELLO"</div>
+    </Modal>
+  );
+}
 
-### `npm test`
+import { useModal } from "eykmodal";
+import DetailModal from "./DetailModal";
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+function App() {
+  const { openModal } = useModal();
+  const handleOnclick = () => {
+    openModal();
+  };
 
-### `npm run build`
+  return (
+    <div className="App">
+      <button onClick={handleOnclick}>OPEN MODAL</button>
+      <DetailModal />
+    </div>
+  );
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## useModal Hook
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+const { isModalOpen, openModal, closeModal } = useModal();
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Function    | Description                                                                  |
+| ----------- | ---------------------------------------------------------------------------- |
+| useModal    | Initializes the modal state and dispatch functions.                          |
+| isModalOpen | A boolean value that determines if the modal is currently open or closed.    |
+| openModal   | A function that sets the isModalOpen value to true, which opens the modal.   |
+| closeModal  | A function that sets the isModalOpen value to false, which closes the modal. |
